@@ -13,16 +13,16 @@ class Pokemon(models.Model):
                                            related_name='next_evolutions',
                                            on_delete=models.SET_NULL)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = "Покемон"
         verbose_name_plural = "Покемоны"
 
+    def __str__(self):
+        return self.title
+
 
 class PokemonEntity(models.Model):
-    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, related_name="entities", verbose_name = "Покемон")
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, related_name="entities", verbose_name="Покемон")
     lat = models.FloatField("Широта")
     lon = models.FloatField("Долгота")
     appeared_at = models.DateTimeField("Время появления")
@@ -33,10 +33,11 @@ class PokemonEntity(models.Model):
     defence = models.IntegerField("Защита", blank=True, null=True)
     stamina = models.IntegerField("Энергия", blank=True, null=True)
 
-    def __str__(self):
-        return f"{self.id}.{self.pokemon.title}"
-
     class Meta:
         verbose_name = "Существо"
         verbose_name_plural = "Существа"
+
+    def __str__(self):
+        return f"{self.id}.{self.pokemon.title}"
+
 
