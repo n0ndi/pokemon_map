@@ -18,7 +18,11 @@
     </ul>
     <div class="d-flex mt-5 row">
       <div class="pull-left mr-2 float-left ml-4">
-        <img src={% str(pokemon.image.url) if pokemon.image else: default_img %} style="height:200px; width:200px">
+        {% if pokemon.image %}
+          <img src="{{pokemon.image.url}}" style="height:200px; width:200px">
+        {% else %}
+          <img src="{{default_img}}" style="height:200px; width:200px">
+        {% endif %}
       </div>
       <div class="m-2 ml-4 col-11 col-sm-8 col-lg-8 col-xl-8">
         <h1>{{pokemon.title}}</h1>
@@ -33,7 +37,11 @@
                   <div class="img-thumbnail">
                     <a href="{% url 'pokemon' pokemon.previous_evolution.id %}">
                       <div class="d-flex justify-content-center">
-                        <img class="pull-left mr-2 float-left" src={% str(pokemon.previous_evolution.image.url) if pokemon.previous_evolution.image else: default_img %} style="height:50px; width:50px">
+                        {% if pokemon.previous_evolution.image %}
+                          <img class="pull-left mr-2 float-left" src={{pokemon.previous_evolution.image.url}} style="height:50px; width:50px">
+                        {% else %}
+                          <img class="pull-left mr-2 float-left" src={{default_img}} style="height:50px; width:50px">
+                        {% endif %}
                         <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.previous_evolution.title_ru}}</p>
                       </div>
                     </a>
@@ -46,7 +54,11 @@
                   <div class="img-thumbnail">
                     <a href="{% url 'pokemon' pokemon.next_evolution.id %}">
                       <div class="d-flex justify-content-center">
-                        <img class="pull-left mr-2 float-left" src="{% str(pokemon.next_evolution.image.url) if pokemon.next_evolution.image else: default_img % }" style="height:50px; width:50px">
+                        {% if pokemon.next_evolution.image %}
+                          <img class="pull-left mr-2 float-left" src="{{ pokemon.next_evolution.image.url }}" style="height:50px; width:50px">
+                        {% else %}
+                          <img class="pull-left mr-2 float-left" src="{{ default_img}}" style="height:50px; width:50px">
+                        {% endif %}
                         <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.next_evolution.title_ru}}</p>
                       </div>
                     </a>
