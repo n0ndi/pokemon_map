@@ -2,9 +2,10 @@ import folium
 import json
 
 from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils.timezone import localtime
 from .models import *
+
 
 
 MOSCOW_CENTER = [55.751244, 37.618423]
@@ -55,7 +56,7 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    pokemon = Pokemon.objects.get_object_or_404(id=pokemon_id)
+    pokemon = get_object_or_404(Pokemon, id=pokemon_id)
     time = localtime()
     pokemon_entities = pokemon.entities.filter(appeared_at__lte=time, disappeared_at__gte=time())
 
